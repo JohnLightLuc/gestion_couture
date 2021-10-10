@@ -1,0 +1,34 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class AlterTableRendezVous extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::table('rendez_vous', function (Blueprint $table) {
+            $table->unsignedBigInteger('couture_id');
+
+            $table->foreign('couture_id')->references('id')->on('coutures');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('rendez_vous', function (Blueprint $table) {
+            $table->dropColumn('couture_id');
+        });
+    }
+}
